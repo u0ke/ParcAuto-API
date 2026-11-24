@@ -1,11 +1,4 @@
 export default function journal(req, res, next) {
-    const startedAt = Date.now();
-
-    res.on("finish", () => {
-        console.log(
-            `${new Date().toISOString()} ${req.method} ${req.originalUrl} ${res.statusCode} ${Date.now() - startedAt}ms`,
-        );
-    });
-
+    console.log(`${req.method} ${req.originalUrl}`);
     next();
 }

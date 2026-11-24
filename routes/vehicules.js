@@ -49,7 +49,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     const marque = req.body.marque;
-    const model = req.body.model ?? req.body.modele;
+    const model = req.body.model;
     const immatriculation = req.body.immatriculation;
 
     if (
@@ -61,7 +61,7 @@ router.post("/", (req, res) => {
         immatriculation.trim() === ""
     ) {
         return res.status(400).json({
-            error: "marque, model and immatriculation are required",
+            error: "Missing required fields",
         });
     }
 
@@ -90,15 +90,11 @@ router.patch("/:id", (req, res) => {
         return res.status(404).json({ error: "Vehicle not found" });
     }
 
-    const allowedFields = ["marque", "model", "modele", "immatriculation", "disponible"];
+    const allowedFields = ["marque", "model", "immatriculation", "disponible"];
 
     for (const field of allowedFields) {
         if (Object.prototype.hasOwnProperty.call(req.body, field)) {
-            if (field === "modele") {
-                vehicle.model = req.body[field];
-            } else {
-                vehicle[field] = req.body[field];
-            }
+            vehicle[field] = req.body[field];
         }
     }
 
