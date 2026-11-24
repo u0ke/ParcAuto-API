@@ -7,8 +7,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(journal);
-app.use('/vehicules', vehicleRoutes);
+app.use('/vehicles', vehicleRoutes);
 
 app.listen(port, () => {
-    console.log(`Server is running on port https://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
